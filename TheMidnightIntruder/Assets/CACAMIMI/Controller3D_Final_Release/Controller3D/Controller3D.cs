@@ -62,6 +62,9 @@ using UnityEngine;
         //Camera rotation.
         m_cameraHorizontalEulerAngles = Mathf.Clamp(m_cameraHorizontalEulerAngles + m_mouseSensitivity * -MouseY, m_minimumEulerAngle, m_maximumEulerAngle);
         m_camera.transform.localRotation = Quaternion.Euler(Vector3.right * m_cameraHorizontalEulerAngles);
+        m_cameraHorizontalEulerAngles = Mathf.Clamp(m_cameraHorizontalEulerAngles + m_mouseSensitivity * -MouseX, m_minimumEulerAngle, m_maximumEulerAngle);
+        m_camera.transform.localRotation = Quaternion.Euler(Vector3.right * m_cameraHorizontalEulerAngles);
+
 
         //Jump:
         if (Input.GetKeyDown(m_jumpKey) && IsGrounded) { m_rigidbody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse); }
