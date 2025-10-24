@@ -1,10 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/// <summary>
-/// LogoSway — faz a logo/título balançar/virar de um lado para o outro.
-/// Amplia um pouco quando o mouse passa em cima (para UI com EventSystem ativo).
-/// </summary>
+
 [DisallowMultipleComponent]
 public class way : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -67,7 +64,7 @@ public class way : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         else
             _t.localRotation = rot;
 
-        // anima a escala quando o mouse passa
+     
         Vector3 targetScale = _hovering ? _baseScale * hoverScale : _baseScale;
         _t.localScale = Vector3.Lerp(_t.localScale, targetScale, dt * scaleSpeed);
     }
