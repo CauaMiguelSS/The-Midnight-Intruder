@@ -966,8 +966,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 423f3b7bf1232c944aa6b84823602024, type: 2}
+  m_sharedMaterial: {fileID: -7422291241792913216, guid: 423f3b7bf1232c944aa6b84823602024, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1055,6 +1055,8 @@ GameObject:
   - component: {fileID: 1797268534}
   - component: {fileID: 1797268533}
   - component: {fileID: 1797268532}
+  - component: {fileID: 1797268536}
+  - component: {fileID: 1797268535}
   m_Layer: 5
   m_Name: l;jxdgfuk
   m_TagString: Untagged
@@ -1079,8 +1081,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 641, y: -373}
-  m_SizeDelta: {x: 218.962, y: 51.204}
+  m_AnchoredPosition: {x: 577, y: -331}
+  m_SizeDelta: {x: 218.962, y: 51.202}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1797268532
 MonoBehaviour:
@@ -1125,7 +1127,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1797268533}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1797268536}
+        m_TargetAssemblyTypeName: Jogo, Assembly-CSharp
+        m_MethodName: CreditosVoltar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1797268533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1164,6 +1178,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797268530}
   m_CullTransparentMesh: 1
+--- !u!114 &1797268535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797268530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3eed948c8123b24496372afa040d754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::way
+  axis: 0
+  maxAngle: 0
+  speed: 0
+  phaseOffset: 0
+  useUnscaledTime: 0
+  startPaused: 0
+  hoverScale: 1.1
+  scaleSpeed: 6
+--- !u!114 &1797268536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797268530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79352c2ddd5069b4b890e902fac04db3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Jogo
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
