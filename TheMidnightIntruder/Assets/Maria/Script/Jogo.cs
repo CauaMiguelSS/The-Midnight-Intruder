@@ -13,7 +13,7 @@ public class Jogo : MonoBehaviour
     }
     public void CreditosVoltar()
     {
-        SceneManager.LoadScene("Titulo");
+        SceneManager.LoadScene("Maria(Start)");
 
     }
 }
