@@ -103,4 +103,3 @@ public class EnemyAI : MonoBehaviour
         SceneManager.LoadScene(deathScene);
     }
 }
-
