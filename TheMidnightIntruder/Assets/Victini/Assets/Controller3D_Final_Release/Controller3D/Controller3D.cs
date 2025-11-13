@@ -2,12 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/**
- *  A first person controller component which implements a player's jump, movement, and camera rotation logic.
- *  
- *  @owner Thomas Jacobs.
- *  @link https://thomasjacobs.itch.io/unity-first-person-controller
- */
 [RequireComponent(typeof(Rigidbody))] public sealed class Controller3D : MonoBehaviour
 {
     //Attributes:
@@ -17,13 +11,14 @@ using UnityEngine;
     [SerializeField] private float m_raycastLength = 1.0f;
 
     [Header("Movement Settings:")]
-    [Range(0.01f, 62.0f), SerializeField] private float m_walkSpeed = 30.00f;
-    [Range(0.01f, 62.0f), SerializeField] private float m_sprintSpeed = 40.00f;
+    [Range(0.01f, 62.0f), SerializeField] private float m_walkSpeed = 5f;
+    [Range(0.01f, 62.0f), SerializeField] private float m_sprintSpeed = 8f;
+
 
     [Header("Camera Settings")]
     [Range(0.01f, 10.0f), SerializeField] private float m_mouseSensitivity = 5f;
-    [SerializeField] private float m_minimumEulerAngle = 0.0f;
-    [SerializeField] private float m_maximumEulerAngle = 1.0f;
+    [SerializeField] private float m_minimumEulerAngle = -60.0f;
+    [SerializeField] private float m_maximumEulerAngle = 60.0f;
     private float m_cameraHorizontalEulerAngles = 0.0f;
 
     private Rigidbody m_rigidbody = null;
