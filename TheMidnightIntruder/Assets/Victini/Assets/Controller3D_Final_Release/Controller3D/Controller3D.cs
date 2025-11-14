@@ -12,11 +12,12 @@ public sealed class Controller3D : MonoBehaviour
     [SerializeField] private float m_minimumEulerAngle = -60.0f;
     [SerializeField] private float m_maximumEulerAngle = 60.0f;
     private float m_cameraVerticalRotation = 0.0f;
+    private float m_speedMultiplier = 1f;
 
     private Rigidbody m_rigidbody = null;
     private Camera m_camera = null;
 
-    private float Velocity => Input.GetKey(KeyCode.LeftShift) ? m_sprintSpeed : m_walkSpeed;
+    private float Velocity => (Input.GetKey(KeyCode.LeftShift) ? m_sprintSpeed : m_walkSpeed) * m_speedMultiplier;
     private float HorizontalAxis => Input.GetAxis("Horizontal");
     private float VerticalAxis => Input.GetAxis("Vertical");
     private float MouseX => Input.GetAxis("Mouse X");
@@ -45,5 +46,10 @@ public sealed class Controller3D : MonoBehaviour
     {
         Vector3 moveDirection = (transform.forward * VerticalAxis + transform.right * HorizontalAxis).normalized;
         m_rigidbody.linearVelocity = moveDirection * Velocity + new Vector3(0, m_rigidbody.linearVelocity.y, 0);
+    }
+
+    public void SetWalkSpeedMultiplier(float value)
+    {
+        m_speedMultiplier = value;
     }
 }

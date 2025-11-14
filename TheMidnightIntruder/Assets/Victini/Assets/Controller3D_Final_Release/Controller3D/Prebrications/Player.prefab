@@ -89,7 +89,6 @@ GameObject:
   - component: {fileID: 136188856251673373}
   - component: {fileID: 136188856251673370}
   - component: {fileID: 687008294424890206}
-  - component: {fileID: 8461064332334567227}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -232,29 +231,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a52c9ca94af88418f18ce579a08a83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Controller3D
-  m_jumpForce: 5
-  m_jumpKey: 32
-  m_raycastLength: 1
-  m_walkSpeed: 30
-  m_sprintSpeed: 40
+  m_walkSpeed: 20
+  m_sprintSpeed: 20
   m_mouseSensitivity: 5
   m_minimumEulerAngle: -100
   m_maximumEulerAngle: 100
---- !u!114 &8461064332334567227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 136188856251673371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24ef47789970ff54a8ad0585aedaf439, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Crouch
-  PlayerHeight: {fileID: 0}
-  normalHeight: 2
-  crouchHeight: 0.6
 --- !u!1 &136188856338835612
 GameObject:
   m_ObjectHideFlags: 0
