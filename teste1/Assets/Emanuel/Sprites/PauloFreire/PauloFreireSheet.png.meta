@@ -1,0 +1,416 @@
+fileFormatVersion: 2
+guid: 529d9498bd4d68240a8449c7bcb2289d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9132966393595624402
+    second: PauloFreireSheet_0
+  - first:
+      213: -7288636987460141299
+    second: PauloFreireSheet_1
+  - first:
+      213: -6693445830639750380
+    second: PauloFreireSheet_2
+  - first:
+      213: 549073701015720883
+    second: PauloFreireSheet_3
+  - first:
+      213: -4153462379768381505
+    second: PauloFreireSheet_4
+  - first:
+      213: 2040320784188792568
+    second: PauloFreireSheet_5
+  - first:
+      213: 81371004369916137
+    second: PauloFreireSheet_6
+  - first:
+      213: -4465010022077616873
+    second: PauloFreireSheet_7
+  - first:
+      213: 7235844135764940193
+    second: PauloFreireSheet_8
+  - first:
+      213: -8495487555215234439
+    second: PauloFreireSheet_9
+  - first:
+      213: 2639428976412828644
+    second: PauloFreireSheet_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PauloFreireSheet_0
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 1308
+        width: 435
+        height: 573
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e24072c147f214180800000000000000
+      internalID: -9132966393595624402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PauloFreireSheet_1
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 1304
+        width: 37
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0f3aa9d64f89da90800000000000000
+      internalID: -7288636987460141299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PauloFreireSheet_2
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 1279
+        width: 535
+        height: 604
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 413f56dfa7a1c13a0800000000000000
+      internalID: -6693445830639750380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PauloFreireSheet_3
+      rect:
+        serializedVersion: 2
+        x: 1919
+        y: 639
+        width: 641
+        height: 642
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b31d883f93be9700800000000000000
+      internalID: 549073701015720883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PauloFreireSheet_4
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 671
+        width: 422
+        height: 565
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbff4f9b8ffeb56c0800000000000000
+      internalID: -4153462379768381505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PauloFreireSheet_5
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 646
+        width: 428
+        height: 593
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fe5b6171fca05c10800000000000000
+      internalID: 2040320784188792568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PauloFreireSheet_6
+      rect:
+        serializedVersion: 2
+        x: 1389
+        y: 671
+        width: 422
+        height: 565
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e05c725f76112100800000000000000
+      internalID: 81371004369916137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PauloFreireSheet_7
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 37
+        width: 432
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71d2183aa091902c0800000000000000
+      internalID: -4465010022077616873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PauloFreireSheet_8
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 37
+        width: 432
+        height: 559
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a5dc5287e1ea6460800000000000000
+      internalID: 7235844135764940193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PauloFreireSheet_9
+      rect:
+        serializedVersion: 2
+        x: 1384
+        y: 37
+        width: 432
+        height: 562
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97ae4ad5417f91a80800000000000000
+      internalID: -8495487555215234439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PauloFreireSheet_10
+      rect:
+        serializedVersion: 2
+        x: 2023
+        y: 37
+        width: 432
+        height: 559
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e3a5f47ba221a420800000000000000
+      internalID: 2639428976412828644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PauloFreireSheet_0: -9132966393595624402
+      PauloFreireSheet_1: -7288636987460141299
+      PauloFreireSheet_10: 2639428976412828644
+      PauloFreireSheet_2: -6693445830639750380
+      PauloFreireSheet_3: 549073701015720883
+      PauloFreireSheet_4: -4153462379768381505
+      PauloFreireSheet_5: 2040320784188792568
+      PauloFreireSheet_6: 81371004369916137
+      PauloFreireSheet_7: -4465010022077616873
+      PauloFreireSheet_8: 7235844135764940193
+      PauloFreireSheet_9: -8495487555215234439
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
