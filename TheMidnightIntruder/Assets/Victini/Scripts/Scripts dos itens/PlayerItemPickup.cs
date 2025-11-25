@@ -8,6 +8,9 @@ public class PlayerItemPickup : MonoBehaviour
     public KeyCode dropKey = KeyCode.Q;
     public Camera playerCamera; // <<< ADICIONADO
 
+    private Vector3 originalScale;
+    private Transform originalParent;
+
     private Item heldItem;
 
     void Update()
@@ -46,5 +49,24 @@ public class PlayerItemPickup : MonoBehaviour
 
         heldItem.OnDrop();
         heldItem = null;
+    }
+
+    public void OnPickUp(Transform holdPoint)
+    {
+        originalScale = transform.localScale;
+        originalParent = transform.parent;
+
+        transform.SetParent(holdPoint);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+
+        transform.localScale = originalScale;
+    }
+
+    public void OnDrop()
+    {
+        transform.SetParent(null);
+
+        transform.localScale = originalScale;
     }
 }
