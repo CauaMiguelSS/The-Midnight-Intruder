@@ -4,27 +4,22 @@ public class FlashLight : MonoBehaviour
 {
     [SerializeField] GameObject FlashlightLight;
     private bool FlashLightActive = false;
+
     void Start()
     {
-        FlashlightLight.gameObject.SetActive(false);
+        FlashlightLight.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (!KeyManager.Instance.lanterna)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            if (FlashLightActive == false)
-            {
-                FlashlightLight.gameObject.SetActive(true);
-                FlashLightActive = true;
-            }
-
-            else 
-            {
-                FlashlightLight.gameObject.SetActive(false);
-                FlashLightActive = false;
-            }
-
+            FlashLightActive = !FlashLightActive;
+            FlashlightLight.SetActive(FlashLightActive);
         }
     }
 }
+
