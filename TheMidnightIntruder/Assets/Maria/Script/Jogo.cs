@@ -5,7 +5,7 @@ public class Jogo : MonoBehaviour
 {
     public void Jogar()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("CauaMigs");
     }
     public void Creditos()
     {

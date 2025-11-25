@@ -607,7 +607,9 @@ PrefabInstance:
       value: LowPolyHouse 3.0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2873655185711754873, guid: 4c9727a9b181c614c961b5a7c20fdc12, type: 3}
+    - {fileID: 5202015811179980736, guid: 4c9727a9b181c614c961b5a7c20fdc12, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c9727a9b181c614c961b5a7c20fdc12, type: 3}
