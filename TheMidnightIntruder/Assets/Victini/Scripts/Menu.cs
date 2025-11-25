@@ -4,6 +4,16 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] private GameObject menuPanel;
     private bool isMenuOpen = false;
+    private bool cameraLock = true;
+
+    Controller3D controller3D;
+
+    public void Start()
+    {
+        controller3D = FindAnyObjectByType(typeof(Controller3D)) as Controller3D;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     void Update()
     {
@@ -15,8 +25,11 @@ public class Menu : MonoBehaviour
 
     void ToggleMenu()
     {
+        cameraLock = !cameraLock;
         isMenuOpen = !isMenuOpen;
         menuPanel.SetActive(isMenuOpen);
+
+        controller3D.enabled = cameraLock;
 
         Time.timeScale = isMenuOpen ? 0f : 1f;
 
