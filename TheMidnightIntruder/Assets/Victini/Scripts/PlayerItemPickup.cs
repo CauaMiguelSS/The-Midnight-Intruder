@@ -9,6 +9,7 @@ public class PlayerItemPickup : MonoBehaviour
     public Camera playerCamera;
 
     private Item heldItem;
+    public Item GetHeldItem => heldItem;
 
     void Update()
     {
