@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class FlashLightFollow : MonoBehaviour
 {
-    [SerializeField] private Transform cameraTransform; // arrasta tua câmera aqui no inspetor
+    [SerializeField] private Transform cameraTransform; // arrasta tua cï¿½mera aqui no inspetor
     [SerializeField] private float followSpeed = 10f;   // velocidade de acompanhamento
 
     void LateUpdate()
     {
         if (cameraTransform == null) return;
 
-        // Suaviza o movimento da lanterna pra acompanhar a câmera
+        // Suaviza o movimento da lanterna pra acompanhar a cï¿½mera
         transform.rotation = Quaternion.Slerp(
             transform.rotation,
             cameraTransform.rotation,
@@ -17,4 +17,3 @@ public class FlashLightFollow : MonoBehaviour
         );
     }
 }
-
