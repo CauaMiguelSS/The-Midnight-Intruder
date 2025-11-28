@@ -28,6 +28,10 @@ public class EnemyAI : MonoBehaviour
     private int patrolIndex = 0;
     private Vector3 lastSeenPosition;
 
+    public JumpscareController jumpscareManager; // arraste no inspector
+    public float triggerDistance = 1.5f;
+    private bool jumpscareTriggered = false;
+
     void Start()
     {
         currentState = EnemyState.Patrol;
@@ -118,18 +122,27 @@ public class EnemyAI : MonoBehaviour
 
     void Chase()
     {
+        if (jumpscareTriggered) return;
+
         agent.SetDestination(player.position);
         lastSeenPosition = player.position;
 
-        if (Vector3.Distance(transform.position, player.position) > viewDistance * 1.5f)
+        float dist = Vector3.Distance(transform.position, player.position);
+
+        if (dist <= triggerDistance)
+        {
+            jumpscareTriggered = true;
+            if (jumpscareManager != null)
+            jumpscareManager.TriggerJumpscare();
+            else
+            Debug.LogWarning("JumpscareManager não atribuído no inspector do inimigo.");
+        }
+
+        // fallback: se o player sumir, mudar de estado
+        if (dist > viewDistance * 1.5f)
         {
             currentState = EnemyState.Search;
             searchTimer = 0;
-        }
-
-        if (Vector3.Distance(transform.position, player.position) < 1.5f)
-        {
-            player.GetComponent<JumpscareController>().TriggerJumpscare();
         }
     }
 
