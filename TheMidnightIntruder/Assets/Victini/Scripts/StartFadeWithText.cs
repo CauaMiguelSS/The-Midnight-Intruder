@@ -14,10 +14,16 @@ public class StartFadeWithText : MonoBehaviour
     public float typeDelay = 0.05f;
     public float delayBeforeFade = 1.5f;
 
+    [Header("Camera Control")]
+    [Tooltip("Arraste o script que controla o movimento/rotação da câmera/jogador.")]
+    public MonoBehaviour cameraMovementScript;
+
     private void Start()
     {
         fadeGroup.alpha = 1;
         textUI.text = "";
+
+        ToggleCameraControl(false); 
 
         StartCoroutine(FadeSequence());
     }
@@ -30,7 +36,9 @@ public class StartFadeWithText : MonoBehaviour
 
         yield return StartCoroutine(FadeOut());
 
-        gameObject.SetActive(false);
+        ToggleCameraControl(true);
+
+        gameObject.SetActive(false); 
     }
 
     IEnumerator TypewriterEffect()
@@ -56,5 +64,17 @@ public class StartFadeWithText : MonoBehaviour
         }
 
         fadeGroup.alpha = 0f;
+    }
+
+    private void ToggleCameraControl(bool isEnabled)
+    {
+        if (cameraMovementScript != null)
+        {
+            cameraMovementScript.enabled = isEnabled;
+        }
+        else
+        {
+            Debug.LogError("O campo 'Camera Movement Script' não foi preenchido no Inspector!");
+        }
     }
 }
