@@ -8,8 +8,8 @@ public class PlayerItemPickup : MonoBehaviour
     public KeyCode dropKey = KeyCode.Q;
     public Camera playerCamera;
 
-    private Item heldItem;
-    public Item GetHeldItem => heldItem;
+    public Item heldItem;
+    public Item HeldItem => heldItem; // Permite o acesso seguro ao item segurado.
 
     void Update()
     {
@@ -42,7 +42,7 @@ public class PlayerItemPickup : MonoBehaviour
         item.OnPickUp(holdPoint);
     }
 
-    void DropItem()
+    public void DropItem()
     {
         if (heldItem == null) return;
 

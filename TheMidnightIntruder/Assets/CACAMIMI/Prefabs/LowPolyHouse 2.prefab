@@ -1138,7 +1138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b23f7ccad33890d489e07b96c0e383a4, type: 3}
       propertyPath: m_Name
-      value: LowPolyHouse 1 1
+      value: LowPolyHouse 2
       objectReference: {fileID: 0}
     - target: {fileID: 3534916117301952706, guid: b23f7ccad33890d489e07b96c0e383a4, type: 3}
       propertyPath: m_LocalRotation.w

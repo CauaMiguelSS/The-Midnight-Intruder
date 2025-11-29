@@ -70,4 +70,3 @@ public class Item : MonoBehaviour
         transform.localScale = originalScale;
     }
 }
-
