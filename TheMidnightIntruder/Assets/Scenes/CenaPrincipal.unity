@@ -26041,7 +26041,7 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2.1751904, y: 3.1432457, z: 5.9323325}
@@ -35905,12 +35905,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.019456388, y: 0.0199061, z: 0.032139696}
-  m_Center: {x: 0.00010593317, y: 0.00017909223, z: 0.0012023046}
+  m_Size: {x: 0.019456388, y: 0.0199061, z: 0.03065247}
+  m_Center: {x: 0.00010593317, y: 0.00017909223, z: 0.00045869168}
 --- !u!33 &1054978672453917775
 MeshFilter:
   m_ObjectHideFlags: 0

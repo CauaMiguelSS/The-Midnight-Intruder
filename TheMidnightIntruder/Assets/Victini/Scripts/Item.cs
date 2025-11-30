@@ -12,9 +12,9 @@ public class Item : MonoBehaviour
     protected Vector3 originalScale;
     protected Transform originalParent;
 
-    // Suavidade
-    public float moveSpeed = 15f;
-    public float rotateSpeed = 15f;
+    // Suavidade (agora aplicadas no FixedUpdate)
+    public float moveSpeed = 20f;
+    public float rotateSpeed = 20f;
 
     protected virtual void Awake()
     {
@@ -25,24 +25,19 @@ public class Item : MonoBehaviour
         originalParent = transform.parent;
     }
 
-    protected virtual void Update()
+    void FixedUpdate()
     {
-        if (beingHeld && holdPoint != null)
-        {
-            // mover suavemente
-            transform.position = Vector3.Lerp(
-                transform.position,
-                holdPoint.position,
-                Time.deltaTime * moveSpeed
-            );
+        if (!beingHeld || holdPoint == null) return;
 
-            // girar suave
-            transform.rotation = Quaternion.Lerp(
-                transform.rotation,
-                holdPoint.rotation,
-                Time.deltaTime * rotateSpeed
-            );
-        }
+        // -------- MOVIMENTO SUAVE FÍSICO --------
+        Vector3 targetPos = holdPoint.position;
+        Vector3 newPos = Vector3.Lerp(rb.position, targetPos, moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(newPos);
+
+        // -------- ROTAÇÃO SUAVE FÍSICA --------
+        Quaternion targetRot = holdPoint.rotation;
+        Quaternion newRot = Quaternion.Lerp(rb.rotation, targetRot, rotateSpeed * Time.fixedDeltaTime);
+        rb.MoveRotation(newRot);
     }
 
     public virtual void OnPickUp(Transform holdPoint)
@@ -50,10 +45,12 @@ public class Item : MonoBehaviour
         this.holdPoint = holdPoint;
         beingHeld = true;
 
-        // remover física para não “brigar” com a mão
-        rb.isKinematic = true;
+        // Física mais controlada (não usar isKinematic)
         rb.useGravity = false;
-        col.enabled = false;
+        rb.linearDamping = 10f;
+        rb.angularDamping = 10f;
+
+        col.enabled = false; // evita colisão com o player
     }
 
     public virtual void OnDrop()
@@ -61,12 +58,14 @@ public class Item : MonoBehaviour
         beingHeld = false;
         holdPoint = null;
 
-        // soltar física
-        rb.isKinematic = false;
+        // Soltar física
         rb.useGravity = true;
+        rb.linearDamping = 0f;
+        rb.angularDamping = 0f;
+
         col.enabled = true;
 
-        // voltar escala original se algo mudou
+        // Volta escala original
         transform.localScale = originalScale;
     }
 }
