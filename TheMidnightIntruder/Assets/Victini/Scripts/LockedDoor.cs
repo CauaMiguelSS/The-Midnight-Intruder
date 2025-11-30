@@ -2,57 +2,77 @@ using UnityEngine;
 
 public class LockedDoor : MonoBehaviour
 {
+    [Header("Key Settings")]
     public string requiredKeyID;
-    public GameObject cadeado;
-    public Animator doorAnimator; 
 
+    [Header("References")]
+    public GameObject cadeado;
+    public Animator doorAnimator;
+
+    [Header("Audio")]
     public AudioSource doorAudioSource;
     public AudioClip openSound;
     public AudioClip lockAttemptSound;
-    
-    private bool isLocked = true; 
+
+    private bool isLocked = true;
+
+    // ----------------------------------------------------
 
     public void TryUnlock(KeyItem keyHeld, PlayerItemPickup player)
     {
-        if (!isLocked) 
+        if (!isLocked)
+            return;
+
+        // Chave errada ou sem chave
+        if (keyHeld == null || keyHeld.keyID != requiredKeyID)
         {
+            PlaySound(lockAttemptSound);
+            Debug.LogWarning("Porta trancada. Chave incorreta ou faltando.");
             return;
         }
 
-        if (keyHeld == null || keyHeld.keyID != requiredKeyID)
-        {
-            PlayOpenSound(lockAttemptSound); 
-            
-            Debug.LogWarning("Porta trancada. Chave incorreta ou faltando.");
-        }
-        else
-        {
-            UnlockDoor(keyHeld, player);
-        }
+        // Chave correta → abre
+        UnlockDoor(keyHeld, player);
     }
+
+    // ----------------------------------------------------
 
     void UnlockDoor(KeyItem key, PlayerItemPickup player)
     {
         isLocked = false;
-    
-        if (cadeado != null)
-            Destroy(cadeado);
 
-        PlayOpenSound(openSound);
+        if (cadeado != null)
+             Destroy(cadeado);
+
+        PlaySound(openSound);
 
         if (doorAnimator != null)
-            doorAnimator.SetTrigger("Open");
+             doorAnimator.SetTrigger("Open");
 
-        player.DropItem(); 
-        Destroy(key.gameObject); 
+    // 🔥 DESATIVA O COLLIDER DA PORTA (faz o texto sumir)
+        Collider col = GetComponent<Collider>();
+        if (col != null)
+             col.enabled = false;
+
+    // remove chave da mão
+        player.DropItem();
+        Destroy(key.gameObject);
     }
+    // ----------------------------------------------------
 
-    void PlayOpenSound(AudioClip clipToPlay)
+    private void PlaySound(AudioClip clip)
     {
-        if (doorAudioSource != null && clipToPlay != null)
+        if (doorAudioSource != null && clip != null)
         {
-            doorAudioSource.clip = clipToPlay;
+            doorAudioSource.clip = clip;
             doorAudioSource.Play();
         }
+    }
+
+    // ----------------------------------------------------
+
+    public bool IsLocked()
+    {
+        return isLocked;
     }
 }

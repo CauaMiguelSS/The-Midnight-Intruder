@@ -1,4 +1,5 @@
 public interface IInteractable
 {
-    void Interact(PlayerItemPickup player);
+    string GetInteractText();
+    void Interact();
 }

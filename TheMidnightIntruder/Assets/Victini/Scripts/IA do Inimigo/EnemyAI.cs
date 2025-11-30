@@ -132,10 +132,7 @@ public class EnemyAI : MonoBehaviour
         if (dist <= triggerDistance)
         {
             jumpscareTriggered = true;
-            if (jumpscareManager != null)
             jumpscareManager.TriggerJumpscare();
-            else
-            Debug.LogWarning("JumpscareManager não atribuído no inspector do inimigo.");
         }
 
         // fallback: se o player sumir, mudar de estado
@@ -180,5 +177,5 @@ public class EnemyAI : MonoBehaviour
 
         // Se tiver script de movimento próprio
         this.enabled = false;
-        }
+    }
 }

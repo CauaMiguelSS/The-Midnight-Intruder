@@ -1,105 +1,139 @@
 using UnityEngine;
-using UnityEngine.UI; // Necessário para Text/Text Mesh Pro
+using UnityEngine.UI;
 
 public class PlayerHighlight : MonoBehaviour
 {
-    // Distância de detecção do mouse
+    [Header("Interaction")]
     public float highlightDistance = 3f;
-    
-    // UI: Onde o texto de interação ("Aperte E para pegar") será exibido
-    public Text interactionText; // Se estiver usando Text Mesh Pro, use 'TextMeshProUGUI'
-    public Camera playerCamera; 
+    public Text interactionText;
 
-    private HighlightController currentHighlight; // Item atualmente destacado
+    [Header("References")]
+    public Camera playerCamera;
+
+    private HighlightController currentItem;
+    private DoorInteraction currentDoor;
+
+    // ----------------------------------------------------
 
     void Start()
     {
         if (playerCamera == null)
             playerCamera = Camera.main;
-        
-        // Inicialmente esconde o texto
+
         if (interactionText != null)
             interactionText.gameObject.SetActive(false);
     }
 
+    // ----------------------------------------------------
+
     void Update()
     {
-        TryHighlightItem();
+        DetectInteractable();
     }
 
-    void TryHighlightItem()
-    {
-        RaycastHit hit;
+    // ----------------------------------------------------
 
+    private void DetectInteractable()
+    {
         if (playerCamera == null) return;
 
-        // O Raycast deve ser o mesmo que o de pegar itens
-        if (Physics.Raycast(playerCamera.transform.position, 
-                            playerCamera.transform.forward, 
-                            out hit, 
+        RaycastHit hit;
+
+        if (Physics.Raycast(playerCamera.transform.position,
+                            playerCamera.transform.forward,
+                            out hit,
                             highlightDistance))
         {
-            // Tenta encontrar o script HighlightController no objeto atingido
-            HighlightController hitHighlight = hit.collider.GetComponent<HighlightController>();
+            DoorInteraction door = hit.collider.GetComponent<DoorInteraction>();
+            HighlightController item = hit.collider.GetComponent<HighlightController>();
 
-            if (hitHighlight != null)
+            if (door != null)
             {
-                // 1. Encontrou um novo item ou continua no mesmo item
-                if (currentHighlight != hitHighlight)
-                {
-                    // Desativa o destaque do item anterior, se houver
-                    if (currentHighlight != null)
-                        currentHighlight.Highlight(false);
-
-                    // Ativa o destaque no novo item
-                    currentHighlight = hitHighlight;
-                    currentHighlight.Highlight(true);
-                    
-                    // Mostra o texto
-                    ShowText("Aperte 'E' para interagir"); 
-                }
+                HandleDoor(door);
+                return;
             }
-            else
+
+            if (item != null)
             {
-                // 2. Acertou algo, mas não é um item interativo
-                DisableHighlight();
+                HandleItem(item);
+                return;
             }
         }
-        else
-        {
-            // 3. Não acertou nada
-            DisableHighlight();
-        }
+
+        ClearAll();
     }
 
-    void DisableHighlight()
+    // ----------------------------------------------------
+    // PORTAS
+    private void HandleDoor(DoorInteraction door)
     {
-        // Se estava destacando um item, desativa o destaque
-        if (currentHighlight != null)
+        // Desliga item atual
+        if (currentItem != null)
         {
-            currentHighlight.Highlight(false);
-            currentHighlight = null;
+            currentItem.Highlight(false);
+            currentItem = null;
         }
 
-        // Esconde o texto
-        ShowText(""); 
+        currentDoor = door;
+
+        string msg = door.GetMessage();
+        ShowText(msg);
     }
 
-    void ShowText(string message)
+    // ----------------------------------------------------
+    // ITENS
+    private void HandleItem(HighlightController item)
     {
-        if (interactionText != null)
+        currentDoor = null;
+
+        if (currentItem != item)
         {
-            if (string.IsNullOrEmpty(message))
-            {
-                // Se a mensagem está vazia, esconde o texto
-                interactionText.gameObject.SetActive(false);
-            }
-            else
-            {
-                // Se houver mensagem, mostra o texto e atualiza a mensagem
-                interactionText.text = message;
-                interactionText.gameObject.SetActive(true);
-            }
+            if (currentItem != null)
+                currentItem.Highlight(false);
+
+            currentItem = item;
+            currentItem.Highlight(true);
         }
+
+        ShowText("Aperte E para interagir");
+    }
+
+    // ----------------------------------------------------
+
+    private void ClearAll()
+    {
+        if (currentItem != null)
+        {
+            currentItem.Highlight(false);
+            currentItem = null;
+        }
+
+        currentDoor = null;
+        ShowText("");
+    }
+
+    // ----------------------------------------------------
+
+    private void ShowText(string msg)
+    {
+        if (interactionText == null) return;
+
+        if (string.IsNullOrEmpty(msg))
+        {
+            interactionText.gameObject.SetActive(false);
+            return;
+        }
+
+        interactionText.text = msg;
+        interactionText.gameObject.SetActive(true);
+    }
+
+    // ----------------------------------------------------
+
+    public void ForceHideInteraction()
+    {
+        ShowText("");
+        currentDoor = null;
+        currentItem = null;
     }
 }
