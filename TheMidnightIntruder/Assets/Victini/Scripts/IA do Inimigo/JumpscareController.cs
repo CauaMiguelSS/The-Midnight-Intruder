@@ -48,11 +48,4 @@ public class JumpscareController : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
-
-    public void RestartGame()
-    {
-        PlayerLock.IsLocked = false;
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
 }

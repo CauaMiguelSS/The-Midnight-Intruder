@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.1
+  m_AmbientIntensity: 0.15
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 9af23ba5fa5364ff598888460e0e2759, type: 2}
@@ -6592,7 +6592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7536589529388521770, guid: 0bb42d32570eb7649824eeae1c0e368b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14540,7 +14540,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000038147, y: 135.1}
+  m_AnchoredPosition: {x: 0.0000038147, y: 138}
   m_SizeDelta: {x: 246.5716, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &851844820
@@ -14572,8 +14572,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281348144
-  m_fontColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+    rgba: 4291151306
+  m_fontColor: {r: 0.7924528, g: 0.7737629, b: 0.7737629, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -22193,7 +22193,7 @@ MonoBehaviour:
   footstepAudio: {fileID: 1440893199}
   agent: {fileID: 1440893193}
   player: {fileID: 1480951075}
-  maxDistance: 10
+  maxDistance: 4
   minVolume: 0.05
   maxVolume: 0.8
 --- !u!82 &1440893199
@@ -25280,7 +25280,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.3
-  m_Range: 10
+  m_Range: 3
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -26147,7 +26147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.35686275, g: 0.28235295, b: 0.28235295, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -26401,7 +26401,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1742712643}
-        m_TargetAssemblyTypeName: JumpscareController, Assembly-CSharp
+        m_TargetAssemblyTypeName: ExitBtn, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
@@ -26425,7 +26425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.35686275, g: 0.28235295, b: 0.28235295, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -26459,14 +26459,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1742712638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6476295d8fa724d42a48e2b73f05aa63, type: 3}
+  m_Script: {fileID: 11500000, guid: 9176ea218e2596f4893ed704876b8cf7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::JumpscareController
-  playerCamera: {fileID: 0}
-  normalEnemy: {fileID: 0}
-  jumpscareEnemy: {fileID: 0}
-  deathScreen: {fileID: 0}
-  jumpscareSound: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::ExitBtn
 --- !u!1 &1746821115
 GameObject:
   m_ObjectHideFlags: 0
@@ -73714,7 +73709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641884845421696749, guid: ddf93828a7ccb4844945f206e9c8fc92, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 62981.73
+      value: 62981.727
       objectReference: {fileID: 0}
     - target: {fileID: 4641884845421696749, guid: ddf93828a7ccb4844945f206e9c8fc92, type: 3}
       propertyPath: m_LocalPosition.y
@@ -73726,7 +73721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641884845421696749, guid: ddf93828a7ccb4844945f206e9c8fc92, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.37687823
+      value: 0.36708224
       objectReference: {fileID: 0}
     - target: {fileID: 4641884845421696749, guid: ddf93828a7ccb4844945f206e9c8fc92, type: 3}
       propertyPath: m_LocalRotation.x
@@ -73734,7 +73729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641884845421696749, guid: ddf93828a7ccb4844945f206e9c8fc92, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9262628
+      value: 0.9301885
       objectReference: {fileID: 0}
     - target: {fileID: 4641884845421696749, guid: ddf93828a7ccb4844945f206e9c8fc92, type: 3}
       propertyPath: m_LocalRotation.z
@@ -73746,7 +73741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641884845421696749, guid: ddf93828a7ccb4844945f206e9c8fc92, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 135.719
+      value: 136.928
       objectReference: {fileID: 0}
     - target: {fileID: 4641884845421696749, guid: ddf93828a7ccb4844945f206e9c8fc92, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
