@@ -23,6 +23,10 @@ public sealed class Controller3D : MonoBehaviour
     private float MouseX => Input.GetAxis("Mouse X");
     private float MouseY => Input.GetAxis("Mouse Y");
 
+    public EnemyAI enemyAI; // arraste o inimigo no Inspector
+    public float runNoiseInterval = 0.5f;
+    private float runNoiseTimer;
+
     private void Awake()
     {
         m_camera = GetComponentInChildren<Camera>();
@@ -34,6 +38,8 @@ public sealed class Controller3D : MonoBehaviour
 
     private void Update()
     {
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+
         if (PlayerLock.IsLocked) return;
         
         transform.Rotate(Vector3.up * MouseX * m_mouseSensitivity);
@@ -41,6 +47,18 @@ public sealed class Controller3D : MonoBehaviour
         m_cameraVerticalRotation -= MouseY * m_mouseSensitivity;
         m_cameraVerticalRotation = Mathf.Clamp(m_cameraVerticalRotation, m_minimumEulerAngle, m_maximumEulerAngle);
         m_camera.transform.localRotation = Quaternion.Euler(m_cameraVerticalRotation, 0f, 0f);
+
+        if (isRunning)
+        {
+            runNoiseTimer += Time.deltaTime;
+
+            if (runNoiseTimer >= runNoiseInterval)
+            {
+                runNoiseTimer = 0f;
+
+                enemyAI.HearNoise(transform.position);
+            }
+        }
     }
 
     private void FixedUpdate()

@@ -35,5 +35,7 @@ public class Menu : MonoBehaviour
 
         Cursor.visible = isMenuOpen;
         Cursor.lockState = isMenuOpen ? CursorLockMode.None : CursorLockMode.Locked;
+
+        GamePauseState.isPaused = isMenuOpen;
     }
 }

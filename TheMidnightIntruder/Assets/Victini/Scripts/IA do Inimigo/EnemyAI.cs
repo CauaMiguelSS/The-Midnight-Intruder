@@ -3,179 +3,239 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public enum EnemyState { Patrol, Investigate, Chase, Search }
-    public EnemyState currentState;
+    public enum EnemyState { Patrol, Chase, Investigate, Search }
+    public EnemyState currentState = EnemyState.Patrol;
 
     [Header("References")]
     public Transform player;
     public NavMeshAgent agent;
     public Transform[] patrolPoints;
+    public JumpscareController jumpscareManager;
 
     [Header("Vision Settings")]
-    public float viewDistance = 10f;
-    public float viewAngle = 90f;
+    public float viewDistance = 12f;
+    public float viewAngle = 100f;
+    public LayerMask visionMask;
     public LayerMask obstacleMask;
 
+    [Header("Movement")]
+    public float patrolSpeed = 2f;
+    public float chaseSpeed = 4f;
+
+    [Header("Patrol Settings")]
+    public float waitTimeAtPoints = 2f;
+    private float waitTimer = 0f;
+    private int patrolIndex = 0;
+
     [Header("Hearing Settings")]
-    public float hearingRange = 12f;
-    private Vector3 noisePosition;
-    private bool heardNoise;
+    public float hearingRange = 10f;
+    private Vector3 heardNoisePos;
+    private bool heardNoise = false;
 
     [Header("Search Settings")]
-    public float searchDuration = 8f;
-    private float searchTimer;
+    public float searchDuration = 7f;
+    private float searchTimer = 0f;
+    private Vector3 lastSeenPos;
 
-    private int patrolIndex = 0;
-    private Vector3 lastSeenPosition;
-
-    public JumpscareController jumpscareManager; // arraste no inspector
-    public float triggerDistance = 1.5f;
     private bool jumpscareTriggered = false;
+
+    private EnemyFootsteps footsteps;
+
+    [Header("Start Delay")]
+    public float startDelay = 5f;
+    private float startTimer = 0f;
+    private bool aiActive = false;
 
     void Start()
     {
-        currentState = EnemyState.Patrol;
-        agent.SetDestination(patrolPoints[patrolIndex].position);
+        agent = GetComponent<NavMeshAgent>();
+        footsteps = GetComponent<EnemyFootsteps>();
+
+        // 🔥 NOVO – agora só define o player no footsteps
+        if (footsteps != null)
+        {
+            footsteps.player = player;
+        }
     }
 
     void Update()
     {
+        // ==========================================
+        //   DELAY PARA COMEÇAR A IA (5 SEGUNDOS)
+        // ==========================================
+        if (!aiActive)
+        {
+            startTimer += Time.deltaTime;
+
+            agent.isStopped = true;
+
+            if (startTimer >= startDelay)
+            {
+                aiActive = true;
+                agent.isStopped = false;
+            }
+
+            return;
+        }
+        // ==========================================
+
+        if (jumpscareTriggered) return;
+
+        DetectPlayer();
+
         switch (currentState)
         {
             case EnemyState.Patrol:
                 Patrol();
                 break;
 
-            case EnemyState.Investigate:
-                Investigate();
-                break;
-
             case EnemyState.Chase:
                 Chase();
+                break;
+
+            case EnemyState.Investigate:
+                Investigate();
                 break;
 
             case EnemyState.Search:
                 Search();
                 break;
         }
-
-        DetectPlayer();
     }
 
-    // ========== DETECÇÃO ==========
+    // ================================
+    //            VISÃO
+    // ================================
     void DetectPlayer()
     {
-        Vector3 dir = (player.position - transform.position).normalized;
-        float distance = Vector3.Distance(transform.position, player.position);
+        if (PlayerHiddenState.isHidden)
+            return;
 
-        bool inViewDistance = distance <= viewDistance;
-        bool inViewAngle = Vector3.Angle(transform.forward, dir) < viewAngle / 2;
+        Vector3 eyePos = transform.position + Vector3.up * 1.6f;
+        Vector3 dir = (player.position - eyePos).normalized;
+        float dist = Vector3.Distance(transform.position, player.position);
 
-        if (inViewDistance && inViewAngle)
+        if (dist > viewDistance) return;
+
+        float angle = Vector3.Angle(transform.forward, dir);
+        if (angle > viewAngle / 2f) return;
+
+        if (Physics.Raycast(eyePos, dir, out RaycastHit hit, viewDistance, visionMask))
         {
-            if (!Physics.Raycast(transform.position + Vector3.up * 1.5f, dir, distance, obstacleMask))
+            if (hit.collider.CompareTag("Player"))
             {
-                currentState = EnemyState.Chase;
-                lastSeenPosition = player.position;
+                if (!Physics.Raycast(eyePos, dir, dist, obstacleMask))
+                {
+                    lastSeenPos = player.position;
+                    currentState = EnemyState.Chase;
+                }
             }
         }
     }
 
-    // Chamado por outros scripts para gerar barulho
-    public void HearNoise(Vector3 pos)
+    // ================================
+    //        ESCUTAR BARULHO
+    // ================================
+    public void HearNoise(Vector3 noisePos)
     {
-        if (Vector3.Distance(transform.position, pos) <= hearingRange)
+        if (Vector3.Distance(transform.position, noisePos) <= hearingRange)
         {
-            noisePosition = pos;
             heardNoise = true;
+            heardNoisePos = noisePos;
             currentState = EnemyState.Investigate;
         }
     }
 
-    // ========== ESTADOS ==========
-
+    // ================================
+    //            PATRULHA
+    // ================================
     void Patrol()
     {
-        if (agent.remainingDistance < 0.5f)
-        {
-            patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
-            agent.SetDestination(patrolPoints[patrolIndex].position);
-        }
+        agent.speed = patrolSpeed;
+
+        if (patrolPoints.Length == 0) return;
 
         if (heardNoise)
         {
             currentState = EnemyState.Investigate;
-        }
-    }
-
-    void Investigate()
-    {
-        agent.SetDestination(noisePosition);
-
-        if (Vector3.Distance(transform.position, noisePosition) < 1f)
-        {
-            heardNoise = false;
-            searchTimer = 0;
-            currentState = EnemyState.Search;
-        }
-    }
-
-    void Chase()
-    {
-        if (jumpscareTriggered) return;
-
-        agent.SetDestination(player.position);
-        lastSeenPosition = player.position;
-
-        float dist = Vector3.Distance(transform.position, player.position);
-
-        if (dist <= triggerDistance)
-        {
-            jumpscareTriggered = true;
-            jumpscareManager.TriggerJumpscare();
+            return;
         }
 
-        // fallback: se o player sumir, mudar de estado
-        if (dist > viewDistance * 1.5f)
+        if (agent.remainingDistance < 0.3f)
         {
-            currentState = EnemyState.Search;
-            searchTimer = 0;
-        }
-    }
+            waitTimer += Time.deltaTime;
 
-    void Search()
-    {
-        agent.SetDestination(lastSeenPosition);
-
-        if (agent.remainingDistance < 1f)
-        {
-            searchTimer += Time.deltaTime;
-
-            if (searchTimer >= searchDuration)
+            if (waitTimer >= waitTimeAtPoints)
             {
-                heardNoise = false;
-                currentState = EnemyState.Patrol;
+                waitTimer = 0f;
+                patrolIndex = Random.Range(0, patrolPoints.Length);
                 agent.SetDestination(patrolPoints[patrolIndex].position);
             }
         }
     }
 
-    public void FreezeEnemy()
+    // ================================
+    //           PERSEGUIR
+    // ================================
+    void Chase()
     {
-        // Se estiver usando NavMeshAgent — para o movimento
-        var agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        if (agent != null)
+        agent.speed = chaseSpeed;
+
+        agent.SetDestination(player.position);
+        lastSeenPos = player.position;
+
+        float dist = Vector3.Distance(transform.position, player.position);
+
+        if (dist < 1.5f && !jumpscareTriggered)
         {
-            agent.isStopped = true;
-            agent.ResetPath();
+            jumpscareTriggered = true;
+            jumpscareManager.TriggerJumpscare();
+            return;
         }
 
-        // Se tiver animação de andar
-        var animator = GetComponent<Animator>();
-        if (animator != null)
-            animator.speed = 0;
+        if (dist > viewDistance * 1.3f)
+        {
+            currentState = EnemyState.Investigate;
+        }
+    }
 
-        // Se tiver script de movimento próprio
+    // ================================
+    //          INVESTIGAR
+    // ================================
+    void Investigate()
+    {
+        agent.speed = patrolSpeed;
+
+        Vector3 target = heardNoise ? heardNoisePos : lastSeenPos;
+        agent.SetDestination(target);
+
+        if (agent.remainingDistance < 0.4f)
+        {
+            heardNoise = false;
+            currentState = EnemyState.Search;
+            searchTimer = 0f;
+        }
+    }
+
+    // ================================
+    //             PROCURAR
+    // ================================
+    void Search()
+    {
+        agent.speed = patrolSpeed;
+        searchTimer += Time.deltaTime;
+
+        if (searchTimer >= searchDuration)
+        {
+            currentState = EnemyState.Patrol;
+            agent.SetDestination(patrolPoints[patrolIndex].position);
+        }
+    }
+
+    public void FreezeEnemy()
+    {
+        agent.isStopped = true;
+        agent.ResetPath();
         this.enabled = false;
     }
 }
