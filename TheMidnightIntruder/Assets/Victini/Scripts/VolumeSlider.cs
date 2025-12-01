@@ -7,10 +7,10 @@ public class VolumeSlider : MonoBehaviour
 
     void Start()
     {
-        // Valor inicial
+        
         slider.value = AudioListener.volume;
 
-        // Listener executado sempre que o slider for movido
+        
         slider.onValueChanged.AddListener(SetVolume);
     }
 

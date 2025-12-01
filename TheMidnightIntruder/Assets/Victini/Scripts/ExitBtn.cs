@@ -10,6 +10,6 @@ public class ExitBtn : MonoBehaviour
 
     public void ReturnToMenu()
     {
-        SceneManager.LoadScene("Maria(Start)");
+        SceneManager.LoadScene("MariaStart");
     }
 }
