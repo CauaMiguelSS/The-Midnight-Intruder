@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MariaStart.unity
+    path: Assets/Scenes/Maria(Start).unity
     guid: 64de7085326ab9c408e470dd7540ee14
   - enabled: 1
     path: Assets/Scenes/Credits.unity
@@ -14,15 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CenaPrincipal.unity
     guid: a7549e9b2f3399644b41f668c7eedc86
-  - enabled: 1
-    path: Assets/Scenes/Victini.unity
-    guid: e02c06e9dcbcb6e46808d517d49affb3
-  - enabled: 1
-    path: Assets/Scenes/CenaFinal.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/Scenes/IAinimigo.unity
-    guid: 10d64d09d5b0edf46b892fd3aeb2c523
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
