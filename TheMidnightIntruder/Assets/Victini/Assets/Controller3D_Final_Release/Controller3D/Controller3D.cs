@@ -34,6 +34,7 @@ public sealed class Controller3D : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerLock.IsLocked) return;
         
         transform.Rotate(Vector3.up * MouseX * m_mouseSensitivity);
         
@@ -44,6 +45,8 @@ public sealed class Controller3D : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (PlayerLock.IsLocked) return;
+
         Vector3 moveDirection = (transform.forward * VerticalAxis + transform.right * HorizontalAxis).normalized;
         m_rigidbody.linearVelocity = moveDirection * Velocity + new Vector3(0, m_rigidbody.linearVelocity.y, 0);
     }
