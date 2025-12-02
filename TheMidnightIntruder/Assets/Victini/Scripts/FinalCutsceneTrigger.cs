@@ -1,27 +1,38 @@
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.UI;
 using System.Collections;
 
 public class FinalCutsceneTrigger : MonoBehaviour
 {
     [Header("Cutscene")]
     public PlayableDirector cutscene;
-    public Camera playerCamera;       // câmera do jogador
-    public Camera cutsceneCamera;     // câmera da cutscene (filha animada)
+    public Camera playerCamera;
+    public Camera cutsceneCamera;
 
     [Header("Lanterna")]
     public GameObject flashlightObject;
 
     [Header("UI Final")]
     public CanvasGroup fadeGroup;     // fundo preto
-    public CanvasGroup uiGroup;       // texto + botões
+    public CanvasGroup finishPanel;   // texto + botões
     public float fadeDuration = 2f;
 
     [Header("Audio")]
     public AudioSource breathingAudio;
 
     private bool hasPlayed = false;
+
+    private void Awake()
+    {
+        fadeGroup.alpha = 0f;
+        finishPanel.alpha = 0f;
+
+        fadeGroup.gameObject.SetActive(false);
+        finishPanel.gameObject.SetActive(false);
+
+        if (cutsceneCamera != null)
+            cutsceneCamera.enabled = false;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -34,29 +45,20 @@ public class FinalCutsceneTrigger : MonoBehaviour
 
     private void StartCutscene()
     {
-        // Desativa lanterna
         if (flashlightObject != null)
             flashlightObject.SetActive(false);
 
-        // Desativa câmera do jogador
         if (playerCamera != null)
             playerCamera.enabled = false;
 
-        // Ativa câmera da cutscene
-        if (cutsceneCamera != null)
-        {
-            cutsceneCamera.gameObject.SetActive(true);
-            cutsceneCamera.enabled = true;
-        }
+        cutsceneCamera.gameObject.SetActive(true);
+        cutsceneCamera.enabled = true;
 
-        // Toca áudio de respiração
         if (breathingAudio != null)
             breathingAudio.Play();
 
-        // Assina evento de fim da cutscene
         cutscene.stopped += OnCutsceneFinished;
 
-        // Reinicia timeline do começo
         cutscene.time = 0;
         cutscene.Evaluate();
         cutscene.Play();
@@ -64,59 +66,39 @@ public class FinalCutsceneTrigger : MonoBehaviour
 
     private void OnCutsceneFinished(PlayableDirector pd)
     {
-        // Inicia fade-in do UI que ficará ativo permanentemente
-        StartCoroutine(FadeInUI());
+        StartCoroutine(FadeBlackThenShowPanel());
 
-        // Reativa câmera do jogador e desativa a cutscene
-        if (playerCamera != null)
-            playerCamera.enabled = true;
+        cutsceneCamera.enabled = false;
+        playerCamera.enabled = true;
 
-        if (cutsceneCamera != null)
-            cutsceneCamera.enabled = false;
-
-        // Remove evento para evitar chamadas repetidas
         cutscene.stopped -= OnCutsceneFinished;
         cutscene.Stop();
 
-        // Libera cursor
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    private IEnumerator FadeInUI()
+    private IEnumerator FadeBlackThenShowPanel()
     {
-        // Ativa os objetos de UI na cena
+        // FADE SOMENTE DO FUNDO PRETO
         fadeGroup.gameObject.SetActive(true);
-        uiGroup.gameObject.SetActive(true);
-
-        // Começa do alpha 0
         fadeGroup.alpha = 0f;
-        uiGroup.alpha = 0f;
 
-        float timer = 0f;
+        float t = 0f;
 
-        while (timer < fadeDuration)
+        while (t < fadeDuration)
         {
-            timer += Time.deltaTime;
-            float alpha = Mathf.Clamp01(timer / fadeDuration);
-
-            // Define alpha diretamente
-            fadeGroup.alpha = alpha;
-            uiGroup.alpha = alpha;
-
-            // Força todos os filhos a manter alpha 1 no uiGroup
-            foreach (CanvasGroup cg in uiGroup.GetComponentsInChildren<CanvasGroup>(true))
-            {
-                cg.alpha = 1f;
-            }
-
+            t += Time.deltaTime;
+            fadeGroup.alpha = t / fadeDuration;
             yield return null;
         }
 
-        // Garante que o alpha final seja 1
         fadeGroup.alpha = 1f;
-        uiGroup.alpha = 1f;
 
-        // Mantém os objetos ativos na cena permanentemente
+        // Agora ativa o painel
+        finishPanel.gameObject.SetActive(true);
+        finishPanel.alpha = 1f; // SEM FADE, para não sumir
+
     }
 }
+
