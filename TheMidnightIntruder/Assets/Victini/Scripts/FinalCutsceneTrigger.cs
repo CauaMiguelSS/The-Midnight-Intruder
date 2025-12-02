@@ -7,20 +7,19 @@ public class FinalCutsceneTrigger : MonoBehaviour
 {
     [Header("Cutscene")]
     public PlayableDirector cutscene;
-    public Camera playerCamera;
-    public Camera cutsceneCamera;
+    public Camera playerCamera;       // câmera do jogador
+    public Camera cutsceneCamera;     // câmera da cutscene (filha animada)
 
     [Header("Lanterna")]
-    public GameObject flashlightObject; // <= ADICIONADO
+    public GameObject flashlightObject;
 
     [Header("UI Final")]
-    public CanvasGroup fadeGroup;       // fundo preto
-    public CanvasGroup uiGroup;         // texto + botão
+    public CanvasGroup fadeGroup;     // fundo preto
+    public CanvasGroup uiGroup;       // texto + botões
     public float fadeDuration = 2f;
 
     [Header("Audio")]
     public AudioSource breathingAudio;
-    public float audioFadeOutDuration = 2f;
 
     private bool hasPlayed = false;
 
@@ -33,78 +32,91 @@ public class FinalCutsceneTrigger : MonoBehaviour
         StartCutscene();
     }
 
-    void StartCutscene()
+    private void StartCutscene()
     {
-        // desativar lanterna ao iniciar cutscene
+        // Desativa lanterna
         if (flashlightObject != null)
             flashlightObject.SetActive(false);
 
-        // troca de câmera
-        if (playerCamera != null) playerCamera.enabled = false;
-        if (cutsceneCamera != null) cutsceneCamera.enabled = true;
+        // Desativa câmera do jogador
+        if (playerCamera != null)
+            playerCamera.enabled = false;
 
-        // iniciar som ofegante
+        // Ativa câmera da cutscene
+        if (cutsceneCamera != null)
+        {
+            cutsceneCamera.gameObject.SetActive(true);
+            cutsceneCamera.enabled = true;
+        }
+
+        // Toca áudio de respiração
         if (breathingAudio != null)
             breathingAudio.Play();
 
-        // inicia timeline
+        // Assina evento de fim da cutscene
         cutscene.stopped += OnCutsceneFinished;
+
+        // Reinicia timeline do começo
+        cutscene.time = 0;
+        cutscene.Evaluate();
         cutscene.Play();
     }
 
-    void OnCutsceneFinished(PlayableDirector pd)
+    private void OnCutsceneFinished(PlayableDirector pd)
     {
-        // fade UI
-        StartCoroutine(FadeIn());
+        // Inicia fade-in do UI que ficará ativo permanentemente
+        StartCoroutine(FadeInUI());
 
-        // fade-out do áudio
-        if (breathingAudio != null)
-            StartCoroutine(FadeOutAudio());
+        // Reativa câmera do jogador e desativa a cutscene
+        if (playerCamera != null)
+            playerCamera.enabled = true;
 
-        // liberar cursor
+        if (cutsceneCamera != null)
+            cutsceneCamera.enabled = false;
+
+        // Remove evento para evitar chamadas repetidas
+        cutscene.stopped -= OnCutsceneFinished;
+        cutscene.Stop();
+
+        // Libera cursor
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
-    IEnumerator FadeIn()
+    private IEnumerator FadeInUI()
     {
+        // Ativa os objetos de UI na cena
         fadeGroup.gameObject.SetActive(true);
         uiGroup.gameObject.SetActive(true);
 
-        fadeGroup.alpha = 0;
-        uiGroup.alpha = 0;
+        // Começa do alpha 0
+        fadeGroup.alpha = 0f;
+        uiGroup.alpha = 0f;
 
-        float t = 0;
+        float timer = 0f;
 
-        while (t < fadeDuration)
+        while (timer < fadeDuration)
         {
-            t += Time.deltaTime;
-            float a = t / fadeDuration;
+            timer += Time.deltaTime;
+            float alpha = Mathf.Clamp01(timer / fadeDuration);
 
-            fadeGroup.alpha = a;
-            uiGroup.alpha = a;
+            // Define alpha diretamente
+            fadeGroup.alpha = alpha;
+            uiGroup.alpha = alpha;
+
+            // Força todos os filhos a manter alpha 1 no uiGroup
+            foreach (CanvasGroup cg in uiGroup.GetComponentsInChildren<CanvasGroup>(true))
+            {
+                cg.alpha = 1f;
+            }
 
             yield return null;
         }
 
-        fadeGroup.alpha = 1;
-        uiGroup.alpha = 1;
-    }
+        // Garante que o alpha final seja 1
+        fadeGroup.alpha = 1f;
+        uiGroup.alpha = 1f;
 
-    IEnumerator FadeOutAudio()
-    {
-        float startVolume = breathingAudio.volume;
-        float t = 0f;
-
-        while (t < audioFadeOutDuration)
-        {
-            t += Time.deltaTime;
-            breathingAudio.volume = Mathf.Lerp(startVolume, 0f, t / audioFadeOutDuration);
-            yield return null;
-        }
-
-        breathingAudio.volume = 0f;
-        breathingAudio.Stop();
-        breathingAudio.volume = startVolume; // opcional
+        // Mantém os objetos ativos na cena permanentemente
     }
 }
