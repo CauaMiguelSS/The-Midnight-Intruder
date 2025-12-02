@@ -4051,6 +4051,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1965019102}
+  - {fileID: 2110109192}
   - {fileID: 860169681}
   - {fileID: 803133410}
   - {fileID: 190408756}
@@ -4063,8 +4065,6 @@ RectTransform:
   - {fileID: 1098688579}
   - {fileID: 1423538724}
   - {fileID: 1613276485}
-  - {fileID: 2110109192}
-  - {fileID: 1965019102}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6195,7 +6195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!320 &301725401
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -7925,7 +7925,6 @@ MonoBehaviour:
   uiGroup: {fileID: 1965019103}
   fadeDuration: 2
   breathingAudio: {fileID: 953812025}
-  audioFadeOutDuration: 2
 --- !u!65 &432478669
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17256,7 +17255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &953812020
 Animator:
   serializedVersion: 7
@@ -29087,8 +29086,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8603c497b05233548a74d6e9a86d5be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NavMeshDoor
-  isLocked: 1
-  surface: {fileID: 651063129}
 --- !u!1 &1874356799
 GameObject:
   m_ObjectHideFlags: 0
@@ -30762,7 +30759,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1965019101}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -30774,7 +30771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.000030517578, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1965019103
@@ -74302,15 +74299,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641884845421696749, guid: ddf93828a7ccb4844945f206e9c8fc92, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 62981.992
+      value: 62990.938
       objectReference: {fileID: 0}
     - target: {fileID: 4641884845421696749, guid: ddf93828a7ccb4844945f206e9c8fc92, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.086
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 4641884845421696749, guid: ddf93828a7ccb4844945f206e9c8fc92, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -16400.701
+      value: -16396.697
       objectReference: {fileID: 0}
     - target: {fileID: 4641884845421696749, guid: ddf93828a7ccb4844945f206e9c8fc92, type: 3}
       propertyPath: m_LocalRotation.w
@@ -83065,8 +83062,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8603c497b05233548a74d6e9a86d5be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NavMeshDoor
-  isLocked: 1
-  surface: {fileID: 651063129}
 --- !u!1 &9039585361742391643
 GameObject:
   m_ObjectHideFlags: 0
