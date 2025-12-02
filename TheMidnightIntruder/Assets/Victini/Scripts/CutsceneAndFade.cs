@@ -6,10 +6,14 @@ public class CutsceneTriggerTimeline : MonoBehaviour
     [Header("Cutscene")]
     public PlayableDirector cutsceneDirector; // Timeline da cutscene
     public GameObject fadePanel;              // Painel de fade
-    public float fadeDuration = 1.5f;         // duração do fade
+    public float fadeDuration = 1.5f;         // duraï¿½ï¿½o do fade
 
     private CanvasGroup fadeGroup;
     private bool triggered = false;
+
+    [Header("Player")]
+    public GameObject playerCamera; // arraste a cÃ¢mera do jogador aqui
+    public GameObject playerLantern; // opcional: arraste o objeto da lanterna se quiser desligar
 
     private void Start()
     {
@@ -18,11 +22,11 @@ public class CutsceneTriggerTimeline : MonoBehaviour
         fadeGroup.alpha = 0f;
         fadePanel.SetActive(false);
 
-        // Bloqueia cursor no início
+        // Bloqueia cursor no inï¿½cio
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // Garante que a Timeline não toque automaticamente
+        // Garante que a Timeline nï¿½o toque automaticamente
         cutsceneDirector.Stop();
     }
 
@@ -34,13 +38,18 @@ public class CutsceneTriggerTimeline : MonoBehaviour
         {
             triggered = true;
 
-            // Ativa a CutsceneCamera
+            // Desliga a cÃ¢mera do jogador
+            if (playerCamera != null)
+                playerCamera.SetActive(false);
+
+            // Desliga a lanterna (opcional)
+            if (playerLantern != null)
+                playerLantern.SetActive(false);
+
+            // Ativa a cÃ¢mera da cutscene
             cutsceneDirector.gameObject.SetActive(true);
 
-            // Toca a Timeline
             cutsceneDirector.Play();
-
-            // Assina evento para saber quando a Timeline terminou
             cutsceneDirector.stopped += OnCutsceneFinished;
         }
     }
@@ -53,7 +62,7 @@ public class CutsceneTriggerTimeline : MonoBehaviour
         // Inicia fade do painel
         StartCoroutine(FadeInPanel());
 
-        // Câmera permanece na posição final da cutscene
+        // Cï¿½mera permanece na posiï¿½ï¿½o final da cutscene
     }
 
     private System.Collections.IEnumerator FadeInPanel()
@@ -68,9 +77,9 @@ public class CutsceneTriggerTimeline : MonoBehaviour
             yield return null;
         }
 
-        fadeGroup.alpha = 1f; // Painel totalmente visível
+        fadeGroup.alpha = 1f; // Painel totalmente visï¿½vel
 
-        // Desbloqueia cursor apenas após o fade-in
+        // Desbloqueia cursor apenas apï¿½s o fade-in
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
