@@ -3432,7 +3432,6 @@ GameObject:
   m_Component:
   - component: {fileID: 163853236}
   - component: {fileID: 163853235}
-  - component: {fileID: 163853237}
   m_Layer: 0
   m_Name: Energia caindo
   m_TagString: Untagged
@@ -3552,20 +3551,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &163853237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 163853234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d02ad6b28fe24014e9419c77bbdf7c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FadeInAudio
-  fadeInDuration: 0
-  targetVolume: 0.7
 --- !u!1 &166859342 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c510db1197ed33842beec71f3228a876, type: 3}
@@ -4076,8 +4061,8 @@ RectTransform:
   - {fileID: 144535184}
   - {fileID: 1098688579}
   - {fileID: 1423538724}
-  - {fileID: 2110109192}
   - {fileID: 1613276485}
+  - {fileID: 2110109192}
   - {fileID: 1965019102}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6046,6 +6031,10 @@ PrefabInstance:
     - target: {fileID: 4599889013802440970, guid: 0bb42d32570eb7649824eeae1c0e368b, type: 3}
       propertyPath: enemySpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599889013802440970, guid: 0bb42d32570eb7649824eeae1c0e368b, type: 3}
+      propertyPath: startDelay
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4599889013802440970, guid: 0bb42d32570eb7649824eeae1c0e368b, type: 3}
       propertyPath: hearingRange
@@ -10158,7 +10147,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 31 de Outubro de 2025...
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25b445bbd80028f4fb7eb67068004c9d, type: 2}
   m_sharedMaterial: {fileID: 9176862783826486804, guid: 25b445bbd80028f4fb7eb67068004c9d, type: 2}
@@ -18844,7 +18833,6 @@ GameObject:
   - component: {fileID: 1098688583}
   - component: {fileID: 1098688582}
   - component: {fileID: 1098688581}
-  - component: {fileID: 1098688584}
   m_Layer: 5
   m_Name: FadePanel
   m_TagString: Untagged
@@ -18924,25 +18912,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1098688578}
   m_CullTransparentMesh: 1
---- !u!114 &1098688584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1098688578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b317997118e21604ca566d6103fee0e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StartFadeWithText
-  fadeGroup: {fileID: 1098688581}
-  fadeDuration: 2
-  textUI: {fileID: 160461010}
-  fullText: "O que est\xE1 acontecendo?"
-  typeDelay: 0.07
-  delayBeforeFade: 1.5
-  cameraMovementScript: {fileID: 1480951079}
 --- !u!1 &1113373264 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 674555492858613602, guid: 36e27bc5054a98d48ae6171184b40731, type: 3}
@@ -19845,7 +19814,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Voc\xEA conseguiu escapar da casa ileso e contatou a pol\xEDcia imediatamente.\n\nMas,
-    o assassino ainda est\xE1 a solta pela cidade..."
+    o fantasma ainda est\xE1 a solta..."
 --- !u!222 &1200912719
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20121,6 +20090,62 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216570820}
   m_Mesh: {fileID: 8162244903666519757, guid: ed9161c04888f4f47a999c4fad6490b1, type: 3}
+--- !u!1 &1223785749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1223785751}
+  - component: {fileID: 1223785750}
+  m_Layer: 0
+  m_Name: IntroSequence Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1223785750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223785749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a352a67518a09c146a011ee145ee880b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IntroSequenceManager
+  fadePanelCanvasGroup: {fileID: 1098688581}
+  initialFadeInText: {fileID: 599569170}
+  typingEffectText: {fileID: 160461010}
+  gameAudioSource: {fileID: 163853235}
+  sequenceSound: {fileID: 8300000, guid: d1ff4cdfb34c1bc42bc82b290171b1ad, type: 3}
+  initialTextContent: 31 de Outubro de 2025...
+  typingTextContent: "O que est\xE1 acontecendo?"
+  typingSpeed: 0.05
+  shortFadeDuration: 1.5
+  longFadeDuration: 2
+  waitBeforeTyping: 1.5
+  cameraMovementScript: {fileID: 1480951079}
+--- !u!4 &1223785751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223785749}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 462.22775, y: 0, z: 924.47064}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1228174868
 GameObject:
   m_ObjectHideFlags: 0
@@ -83896,6 +83921,7 @@ SceneRoots:
   - {fileID: 894232704}
   - {fileID: 1877492845}
   - {fileID: 163853236}
+  - {fileID: 1223785751}
   - {fileID: 191331742}
   - {fileID: 2016970515}
   - {fileID: 482981335}
