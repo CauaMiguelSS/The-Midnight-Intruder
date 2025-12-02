@@ -11,12 +11,12 @@ public class FadePanel : MonoBehaviour
             canvasGroup = GetComponent<CanvasGroup>();
 
         canvasGroup.alpha = 0f;
-        gameObject.SetActive(false); // painel começa desativado
+        gameObject.SetActive(false);
     }
 
     public void StartFadeIn()
     {
-        gameObject.SetActive(true); // ativa antes de iniciar a corrotina
+        gameObject.SetActive(true);
         StartCoroutine(FadeInRoutine());
     }
 
@@ -31,6 +31,6 @@ public class FadePanel : MonoBehaviour
             yield return null;
         }
 
-        canvasGroup.alpha = 1f; // totalmente visível
+        canvasGroup.alpha = 1f;
     }
 }

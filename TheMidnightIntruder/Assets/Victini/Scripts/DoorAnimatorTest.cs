@@ -6,7 +6,7 @@ public class DoorAnimatorTest : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T)) // Aperte T para testar
+        if (Input.GetKeyDown(KeyCode.T))
         {
             if (doorAnimator != null)
             {
@@ -15,7 +15,7 @@ public class DoorAnimatorTest : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("doorAnimator n„o est· atribuÌdo!");
+                Debug.LogWarning("doorAnimator n√£o est√° atribu√≠do!");
             }
         }
     }

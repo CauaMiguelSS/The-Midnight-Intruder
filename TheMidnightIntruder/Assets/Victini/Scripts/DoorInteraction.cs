@@ -15,7 +15,6 @@ public class DoorInteraction : MonoBehaviour
 
     public bool alreadyUsed = false;
 
-    // ----------------------------------------------------
 
     void Start()
     {
@@ -26,7 +25,6 @@ public class DoorInteraction : MonoBehaviour
             playerCamera = Camera.main;
     }
 
-    // ----------------------------------------------------
 
     void Update()
     {
@@ -34,7 +32,6 @@ public class DoorInteraction : MonoBehaviour
             TryInteract();
     }
 
-    // ----------------------------------------------------
 
     private void TryInteract()
     {
@@ -52,13 +49,11 @@ public class DoorInteraction : MonoBehaviour
             KeyItem key = player.HeldItem as KeyItem;
             door.TryUnlock(key, player);
 
-            // Se a porta destrancou, some texto
             if (!door.IsLocked())
                 UnlockDoor();
         }
     }
 
-    // ----------------------------------------------------
 
     public void UnlockDoor()
     {
@@ -68,8 +63,6 @@ public class DoorInteraction : MonoBehaviour
         if (playerHighlight != null)
             playerHighlight.ForceHideInteraction();
     }
-
-    // ----------------------------------------------------
 
     public string GetMessage()
     {
