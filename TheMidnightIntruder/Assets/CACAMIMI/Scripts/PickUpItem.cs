@@ -3,12 +3,12 @@ using UnityEngine;
 public class PickUpItem : MonoBehaviour
 
 {
-    public string itemName; // Nome do item (Chave1, Chave2, Chave3, Martelo)
+    public string itemName; 
     private bool playerPerto = false;
 
     [Header("Audio")]
-    public AudioClip pickupSound;   // som ao pegar
-    public AudioSource audioSource; // pode ser do Player
+    public AudioClip pickupSound;  
+    public AudioSource audioSource; 
 
     void Update()
     {
@@ -16,11 +16,10 @@ public class PickUpItem : MonoBehaviour
         {
             KeyManager.Instance.AddItem(itemName);
 
-            // Se for a lanterna, toca o som
             if (itemName == "Lanterna" && audioSource && pickupSound)
                 audioSource.PlayOneShot(pickupSound);
 
-            Destroy(gameObject); // remove a lanterna da bancada
+            Destroy(gameObject);
         }
     }
 
