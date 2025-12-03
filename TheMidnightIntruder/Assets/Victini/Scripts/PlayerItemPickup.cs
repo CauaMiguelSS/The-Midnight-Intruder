@@ -9,7 +9,7 @@ public class PlayerItemPickup : MonoBehaviour
     public Camera playerCamera;
  
     public Item heldItem;
-    public Item HeldItem => heldItem; // Permite o acesso seguro ao item segurado.
+    public Item HeldItem => heldItem;
  
     void Update()
     {
