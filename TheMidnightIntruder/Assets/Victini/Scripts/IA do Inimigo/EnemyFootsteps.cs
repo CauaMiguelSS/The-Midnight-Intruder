@@ -7,7 +7,7 @@ public class EnemyFootsteps : MonoBehaviour
     public Transform player;
 
     [Header("Configuração de distância")]
-    public float maxDistance = 20f;   // distância máxima para ficar audível
+    public float maxDistance = 20f;
 
     [Header("Volume")]
     public float minVolume = 0.05f;
@@ -28,13 +28,10 @@ public class EnemyFootsteps : MonoBehaviour
         if (footstepAudio == null || player == null)
             return;
 
-        // Distância do player
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // Normaliza a distância (0 = perto, 1 = longe)
         float t = Mathf.Clamp01(1 - (distance / maxDistance));
 
-        // Volume baseado na distância
         footstepAudio.volume = Mathf.Lerp(minVolume, maxVolume, t);
     }
 }

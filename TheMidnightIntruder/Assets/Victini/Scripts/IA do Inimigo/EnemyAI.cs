@@ -51,7 +51,6 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         footsteps = GetComponent<EnemyFootsteps>();
 
-        // 🔥 NOVO – agora só define o player no footsteps
         if (footsteps != null)
         {
             footsteps.player = player;
@@ -60,9 +59,6 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        // ==========================================
-        //   DELAY PARA COMEÇAR A IA (5 SEGUNDOS)
-        // ==========================================
         if (!aiActive)
         {
             startTimer += Time.deltaTime;
@@ -77,7 +73,6 @@ public class EnemyAI : MonoBehaviour
 
             return;
         }
-        // ==========================================
 
         if (jumpscareTriggered) return;
 
@@ -103,9 +98,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // ================================
-    //            VISÃO
-    // ================================
     void DetectPlayer()
     {
         if (PlayerHiddenState.isHidden)
@@ -133,9 +125,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // ================================
-    //        ESCUTAR BARULHO
-    // ================================
     public void HearNoise(Vector3 noisePos)
     {
         if (Vector3.Distance(transform.position, noisePos) <= hearingRange)
@@ -146,9 +135,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // ================================
-    //            PATRULHA
-    // ================================
     void Patrol()
     {
         agent.speed = patrolSpeed;
@@ -174,9 +160,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // ================================
-    //           PERSEGUIR
-    // ================================
     void Chase()
     {
         agent.speed = chaseSpeed;
@@ -199,9 +182,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // ================================
-    //          INVESTIGAR
-    // ================================
     void Investigate()
     {
         agent.speed = patrolSpeed;
@@ -217,9 +197,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // ================================
-    //             PROCURAR
-    // ================================
     void Search()
     {
         agent.speed = patrolSpeed;

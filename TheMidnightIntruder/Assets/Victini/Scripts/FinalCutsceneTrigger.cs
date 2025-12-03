@@ -13,8 +13,8 @@ public class FinalCutsceneTrigger : MonoBehaviour
     public GameObject flashlightObject;
 
     [Header("UI Final")]
-    public CanvasGroup fadeGroup;     // fundo preto
-    public CanvasGroup finishPanel;   // texto + botões
+    public CanvasGroup fadeGroup;
+    public CanvasGroup finishPanel;
     public float fadeDuration = 2f;
 
     [Header("Audio")]
@@ -80,7 +80,6 @@ public class FinalCutsceneTrigger : MonoBehaviour
 
     private IEnumerator FadeBlackThenShowPanel()
     {
-        // FADE SOMENTE DO FUNDO PRETO
         fadeGroup.gameObject.SetActive(true);
         fadeGroup.alpha = 0f;
 
@@ -95,9 +94,8 @@ public class FinalCutsceneTrigger : MonoBehaviour
 
         fadeGroup.alpha = 1f;
 
-        // Agora ativa o painel
         finishPanel.gameObject.SetActive(true);
-        finishPanel.alpha = 1f; // SEM FADE, para não sumir
+        finishPanel.alpha = 1f;
 
     }
 }
